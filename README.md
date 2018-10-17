@@ -23,6 +23,12 @@ keywords that MariaDB doesn't support.  Our tools just ignore such queries on
 power test.  As a result, we use only 49 queries for power test.
 
 
+## Makefile
+
+Use the command `make help` to see all command of Makefile.        
+Note that this Makefile is more a tool that a real compile process.  This will help you to setup your install and test different component.
+
+
 ## Quick Start
 
 This section describes simple steps for TPC-DS test setup and execution.  Every
