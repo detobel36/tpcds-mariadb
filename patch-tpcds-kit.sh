@@ -1,10 +1,11 @@
 #!/bin/bash
 
-BINDIR=`dirname $0`
+#BINDIR=`dirname $0`
 
-pushd $BINDIR
+#pushd $BINDIR
 
 TPCDSKIT=./tpcds-kit
+TPCDS_CUSTOM=./tpcds-patch
 
 if [ ! -d $TPCDSKIT ]
 then
@@ -12,8 +13,4 @@ then
 	exit 1
 fi
 
-pushd $TPCDSKIT
-patch -p1 < ../for-mariadb.patch
-popd
-
-popd
+cp -r $TPCDS_CUSTOM/* $TPCDSKIT
