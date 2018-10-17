@@ -6,5 +6,6 @@ then
 	exit 1
 fi
 
-unzip $1
-mv v2.5.0rc2 tpcds-kit
+unzip $1 -d tpcds-unzip
+mv tpcds-unzip/*/ tpcds-kit
+rmdir tpcds-unzip
