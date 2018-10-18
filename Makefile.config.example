@@ -1,0 +1,2 @@
+TPC_URL := https://github.com/gregrahn/tpcds-kit.git
+DB_USER := root

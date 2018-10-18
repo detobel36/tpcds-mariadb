@@ -1,5 +1,6 @@
 # Makefile
 Makefile.save
+Makefile.config
 
 # TPC-DS Folder
 tpcds-kit/

@@ -1,4 +1,11 @@
-TPC_URL=https://owncloud.ulb.ac.be/index.php/s/v6BsCennyblD6OQ/download
+# Load Configuration
+CONFIG_FILE := Makefile.config
+# Explicitly check for the config file, otherwise make -k will proceed anyway.
+ifeq ($(wildcard $(CONFIG_FILE)),)
+$(error $(CONFIG_FILE) not found. Copy $(CONFIG_FILE).example)
+endif
+include $(CONFIG_FILE)
+
 
 all: install extract patch
 
@@ -6,14 +13,16 @@ install:
 	sudo apt-get install wget git
 
 install_database:
-        sudo apt-get install mariadb-server
+	sudo apt-get install mariadb-server
 
 extract:
-	git clone https://github.com/gregrahn/tpcds-kit.git
+	git clone $(TPC_URL)
 
 patch:
 	./patch-tpcds-kit.sh
 
+build:
+	./build.sh
 
 clean: clear
 
