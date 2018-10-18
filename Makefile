@@ -5,6 +5,9 @@ all: install extract patch
 install:
 	sudo apt-get install wget git
 
+install_database:
+        sudo apt-get install mariadb-server
+
 extract:
 	git clone https://github.com/gregrahn/tpcds-kit.git
 
@@ -28,3 +31,6 @@ help:
 	@echo ""
 	@echo "make <clear/clean>"
 	@echo "\tRemove all downloaded files (do not uninstall software)"
+	@echo ""
+	@echo "make install_database"
+	@echo "\tInstall last version of mariadb"
