@@ -30,6 +30,10 @@ remove:
 clean:
 	cd tpcds-kit/tools && $(MAKE) clean
 
+test:
+	./datgen.sh $(TEST_SIZE)
+	./loadtest.sh $(TEST_SIZE) $(DB_USER) $(MYSQL_PATH)
+
 help:
 	@echo "--- Help of this Makefile ---"
 	@echo ""

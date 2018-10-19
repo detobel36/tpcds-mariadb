@@ -1,10 +1,28 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]
+if [ $# -lt 1 ]
 then
-	echo "Usage: $0 <scale factor>"
+	echo "Usage: $0 <scale factor> [sql_user] [sql_path]"
 	exit 1
 fi
+
+if [ $# -ge 2 ]
+then
+	USER=$2
+else
+	USER=root
+fi
+echo "[CONFIG] Test with SQL user: $USER"
+
+if [ $# -ge 3 ]
+then
+	MYSQL_PATH=$3
+else
+	MYSQL_PATH="/usr/local/mysql/bin/mysql"
+fi
+echo "[CONFIG] Use MySQL path: $MYSQL_PATH"
+
+echo ""
 
 BINDIR=`dirname $0`
 pushd $BINDIR/tpcds-kit/tools
@@ -29,8 +47,7 @@ function msec_to_sec() {
 	printf %d.%03d $SECS $MSECS
 }
 
-USER=root
-MYSQL="/usr/local/mysql/bin/mysql -u $USER"
+MYSQL="$MYSQL_PATH -u $USER"
 
 echo "# Create database"
 $MYSQL -e "create database tpcds"

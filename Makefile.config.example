@@ -1,2 +1,4 @@
 TPC_URL := https://github.com/gregrahn/tpcds-kit.git
-DB_USER := root
+DB_USER := root # This user need to be able to login without password and to create databases
+TEST_SIZE := 1 # Go
+MYSQL_PATH := /usr/bin/mysql
