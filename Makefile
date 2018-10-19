@@ -12,9 +12,6 @@ all: install extract patch build
 install:
 	sudo apt-get install wget git byacc bison gcc flex
 
-install_database:
-	sudo apt-get install mariadb-server
-
 extract:
 	git clone $(TPC_URL)
 
@@ -33,6 +30,14 @@ clean:
 test:
 	./datgen.sh $(TEST_SIZE)
 	./loadtest.sh $(TEST_SIZE) $(DB_USER) $(MYSQL_PATH)
+
+# DATABASE
+
+install_database:
+	sudo apt-get install mariadb-server
+
+create_mysql_user:
+	sudo $(MYSQL_PATH) -u root -e "CREATE USER $(DB_USER)@localhost;GRANT ALL PRIVILEGES ON *.* TO $(DB_USER)@localhost;FLUSH PRIVILEGES;"
 
 help:
 	@echo "--- Help of this Makefile ---"
@@ -54,6 +59,9 @@ help:
 	@echo ""
 	@echo "make remove"
 	@echo "\tRemove all downloaded files (do not uninstall software)"
+	@echo ""
+	@echo "make test"
+	@echo "\tGenerate data and test performance (with size specified in the configuration)"
 	@echo ""
 	@echo "make install_database"
 	@echo "\tInstall last version of mariadb"
