@@ -2,7 +2,7 @@
 
 if [ $# -lt 1 ]
 then
-	echo "Usage: $0 <query number> [username [password]]"
+	echo "Usage: $0 <query number> [username [mysql_path]]"
 	exit 1
 fi
 
@@ -14,13 +14,20 @@ USER=root
 
 NUM_Q=$1
 
-if [ $# -gt 1 ]
+if [ $# -ge 2 ]
 then
 	USER=$2
-	PASSWORD=$3
 fi
 
-MYSQL="/usr/local/mysql/bin/mysql -u $USER"
+if [ $# -ge 3 ]
+then
+        MYSQL_PATH=$3
+else
+        MYSQL_PATH="/usr/local/mysql/bin/mysql"
+fi
+
+
+MYSQL="$MYSQL_PATH -u $USER"
 if [ ! -z $PASSWORD ]
 then
 	MYSQL="$MYSQL -p $PASSWORD"

@@ -6,13 +6,21 @@ BINDIR=`dirname $0`
 
 USER=root
 
-# Usage: $0 [user [password] ]
+# Usage: $0 [user [mysql_path]]
 
-if [ $# -eq 2 ]
+if [ $# -ge 1 ]
 then
 	USER=$1
-	PASSWORD=$2
 fi
+echo "[CONFIG] Use MySQL user: $USER"
+
+if [ $# -ge 2 ]
+then
+        MYSQL_PATH=$2
+else
+        MYSQL_PATH="/usr/local/mysql/bin/mysql"
+fi
+echo "[CONFIG] Use MySQL path: $MYSQL_PATH"
 
 function msecs() {
 	echo $((`date +%s%N` / 1000000))
@@ -25,7 +33,8 @@ function msec_to_sec() {
 	printf %d.%03d $SECS $MSECS
 }
 
-MYSQL="/usr/local/mysql/bin/mysql -u $USER"
+
+MYSQL="$MYSQL_PATH -u $USER"
 if [ ! -z $PASSWORD ]
 then
 	MYSQL="$MYSQL -p $PASSWORD"
@@ -38,7 +47,7 @@ TOTAL_MSECONDS=0
 for q in {1..48}
 do
 	START=`msecs`
-	./runquery.sh $q > /dev/null
+	./runquery.sh $q $USER $MYSQL_PATH > /dev/null
 	END=`msecs`
 	DURATION=$(( $END - $START))
 	printf "%d: \t%16s secs\n" $q `msec_to_sec $DURATION`
