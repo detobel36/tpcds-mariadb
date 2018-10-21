@@ -7,6 +7,9 @@ else
 include $(CONFIG_FILE)
 endif
 
+
+#### INITIALIZE ####
+
 all: install extract patch build
 
 install:
@@ -21,23 +24,43 @@ patch:
 build:
 	./build.sh
 
+
+##### CLEAR ####
+
 remove:
 	rm -rf tpcds-kit
 
 clean:
 	cd tpcds-kit/tools && $(MAKE) clean
 
+
+#### TEST ####
+
 test:
+	./mkqueries.sh $(TEST_SIZE)
+	./powertest.sh $(DB_USER) $(MYSQL_PATH)
+
+init_test:
 	./datgen.sh $(TEST_SIZE)
 	./loadtest.sh $(TEST_SIZE) $(DB_USER) $(MYSQL_PATH)
 
-# DATABASE
+test_all: init_test test
+
+test_query:
+	./mkqueries.sh $(TEST_SIZE)
+	./runquery.sh $(QUERY) $(DB_USER) $(MYSQL_PATH)
+
+
+#### DATABASE ####
 
 install_database:
 	sudo apt-get install mariadb-server
 
 create_mysql_user:
 	sudo $(MYSQL_PATH) -u root -e "CREATE USER $(DB_USER)@localhost;GRANT ALL PRIVILEGES ON *.* TO $(DB_USER)@localhost;FLUSH PRIVILEGES;"
+
+
+#### HELP ####
 
 help:
 	@echo "--- Help of this Makefile ---"
@@ -68,7 +91,16 @@ help:
 	@echo "----- TEST -----"
 	@echo ""
 	@echo "make test"
-	@echo "\tGenerate data and test performance (with size specified in the configuration)"
+	@echo "\tTest all queries and mesure performances (with size specified in the configuration)"
+	@echo ""
+	@echo "make test_all"
+	@echo "\tInitialize test (next command) and test performance of all queries (previous command)"
+	@echo ""
+	@echo "make init_test"
+	@echo "\tInitialize test: generate data and load into database"
+	@echo ""
+	@echo "make test_query QUERY=<num>"
+	@echo "\tTest a specific query (you"
 	@echo ""
 	@echo "----- DATABASE -----"
 	@echo ""
