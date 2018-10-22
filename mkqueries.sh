@@ -21,10 +21,12 @@ mkdir -p $out_dir
 	-input ../query_templates/templates_for_mysql.lst \
 	-verbose y -scale $SF -output_dir ./$bak_dir/ -dialect mysql
 
+# Create file "query_0" with all queries
 awk -v prefix="$bak_dir/query-" \
 	'BEGIN {RS=";\n"} {print > (prefix NR ".sql")}' \
 	$bak_dir/query_0.sql
 
+# Format 1, 2.. TO 01, 02...
 for i in {1..9}
 do
 	mv $bak_dir/query-$i.sql $bak_dir/query-`printf %02d $i`.sql
