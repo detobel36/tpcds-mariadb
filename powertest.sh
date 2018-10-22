@@ -43,11 +43,19 @@ fi
 MYSQL="$MYSQL tpcds"
 
 TOTAL_MSECONDS=0
-# We use only 50 queries
-for q in {1..48}
+
+# Reset logs
+echo "" > log-output-queries.txt
+
+# Count number of queries
+NB_QUERIES=`ls -1 --file-type $BINDIR/tpcds-kit/tools/queries/ | grep -v '/$' | wc -l`
+NB_QUERIES=`expr $NB_QUERIES - 1`
+echo "Run $NB_QUERIES queries !"
+
+for q in $(eval echo "{1..$NB_QUERIES}")
 do
 	START=`msecs`
-	./runquery.sh $q $USER $MYSQL_PATH > /dev/null
+	./runquery.sh $q $USER $MYSQL_PATH >> log-output-queries.txt
 	END=`msecs`
 	DURATION=$(( $END - $START))
 	printf "%d: \t%16s secs\n" $q `msec_to_sec $DURATION`
