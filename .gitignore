@@ -4,3 +4,6 @@ Makefile.config
 
 # TPC-DS Folder
 tpcds-kit/
+
+# Output log
+log-output-queries.txt
