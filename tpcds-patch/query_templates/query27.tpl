@@ -46,7 +46,7 @@
  define _LIMIT=100;
 
  [_LIMITA] select [_LIMITB] i_item_id,
-        s_state, grouping(s_state) g_state,
+        s_state, g_state, -- Normally grouping(s_state) g_state
         avg(ss_quantity) agg1,
         avg(ss_list_price) agg2,
         avg(ss_coupon_amt) agg3,
