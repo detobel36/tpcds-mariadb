@@ -139,6 +139,6 @@ from
          and ws_item_sk in (select item_sk from frequent_ss_items)
          and ws_bill_customer_sk in (select c_customer_sk from best_ss_customer)
          and ws_bill_customer_sk = c_customer_sk
-       group by c_last_name,c_first_name) 
+       group by c_last_name,c_first_name) AS test
      order by c_last_name,c_first_name,sales
   [_LIMITC];
