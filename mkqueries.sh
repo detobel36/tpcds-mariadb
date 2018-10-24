@@ -18,6 +18,7 @@ out_dir=queries
 mkdir -p $bak_dir
 mkdir -p $out_dir
 ./dsqgen -directory ../query_templates/ \
+        -QUALIFY Y \
 	-input ../query_templates/templates_for_mysql.lst \
 	-verbose y -scale $SF -output_dir ./$bak_dir/ -dialect mysql
 
