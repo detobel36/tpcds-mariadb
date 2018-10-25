@@ -137,9 +137,7 @@
  from   ws left join wr
         on  ws.wp_web_page_sk = wr.wp_web_page_sk
  ) x
- group by rollup (channel, id)
- order by channel
-         ,id
+ group by channel ASC, id ASC with rollup
  [_LIMITC];
  
 
