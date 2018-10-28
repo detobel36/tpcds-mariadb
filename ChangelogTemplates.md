@@ -164,7 +164,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 81:                0.044 secs
 ```
 **Template:** 77         
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -173,7 +173,7 @@ ERROR 1248 (42000) at line 4: Every derived table must have its own alias
 87:                0.047 secs
 ```
 **Template:** 2         
-===> FIX (Just add "as test")
+:heavy_check_mark: **Solution:** FIX (Just add `as test`)
 
 ----------------
 
@@ -182,7 +182,7 @@ ERROR 1584 (42000) at line 4: Incorrect parameters in the call to stored functio
 89:                0.060 secs
 ```
 **Template:** 40             
-===> ADDDATE but also SUBDATE and remove space after "cast" (to have "cast(" and not "cast (")
+:heavy_check_mark: **Solution:** ADDDATE but also SUBDATE and remove space after `cast` (to have `cast(` and not `cast (`)
 
 ----------------
 
@@ -193,7 +193,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 93:                1.292 secs
 ```
 **Template:** 18           
-===> FIX (WITH ROLLUP)
+:heavy_check_mark: **Solution:** FIX (WITH ROLLUP)
 
 ----------------
 
@@ -207,7 +207,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 102:               0.046 secs
 ```
 **Template:** 5           
-===> FIX (WITH ROLLUP) + ADDDATE + Concatenation (in place of ||)
+:heavy_check_mark: **Solution:** FIX (WITH ROLLUP) + ADDDATE + Concatenation (in place of `||`)
 
 ----------------
 
@@ -217,7 +217,7 @@ and cs1.cs_ship_date_sk = d_date_sk
 and cs1.cs_ship_addr_sk = ca_address_s' at line 12
 ```
 **Template:** 16      
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -226,16 +226,7 @@ ERROR 1584 (42000) at line 4: Incorrect parameters in the call to stored functio
 19:                0.057 secs
 ```
 **Template:** 21      
-===> ADDDATE but also SUBDATE and remove space after `cast` (to have `cast(` and not `cast (`)
-
-----------------
-
-```
-ERROR 1248 (42000) at line 1: Every derived table must have its own alias
-22:                0.053 secs
-```
-**Template:** 23          
-===> FIX (Just add "as test") (FORGET from the previous version)
+:heavy_check_mark: **Solution:** ADDDATE but also SUBDATE and remove space after `cast` (to have `cast(` and not `cast (`)
 
 ----------------
 
@@ -247,7 +238,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 27:                0.043 secs
 ```
 **Template:** 27        
-===> FIX (WITH ROLLUP)
+:heavy_check_mark: **Solution:** FIX (WITH ROLLUP)
 
 ----------------
 
@@ -259,8 +250,8 @@ and cs_ext_discount_amt
      ' at line 10
 32:                0.048 secs
 ```
-**Template:**        
-===> ADDDATE
+**Template:** 32        
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -270,7 +261,7 @@ ERROR 1305 (42000) at line 4: FUNCTION tpcds.grouping does not exist
 27:              0.055 secs
 ```
 **Template:** 27       
-===> Contains function "grouping(column) column".  It work if we remove it temporary...
+:heavy_check_mark: **Solution:** Contains function `grouping(column) column`.  It work if we remove it temporary...
 
 ----------------
 
@@ -282,7 +273,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 36:              0.401 secs
 ```
 **Template:** 36          
-==> Grouping + Rollup + order with rollup
+:x: **Problem:** Grouping + Rollup + order with rollup
 
 ----------------
 
@@ -293,7 +284,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 37:              0.177 secs
 ```
 **Template:** 37         
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -303,7 +294,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 51:              0.113 secs
 ```
 **Template:** 51       
-===> "FULL OUTER JOIN" changed to "LEFT OUTER JOIN"
+:heavy_check_mark: **Solution:** `FULL OUTER JOIN` changed to `LEFT OUTER JOIN`
 
 ----------------
 
@@ -312,7 +303,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 66:                0.055 secs
 ```
 **Template:** 67       
-===> ROLLUP
+:heavy_check_mark: **Solution:** ROLLUP
 
 ----------------
 
@@ -324,7 +315,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 69:                0.044 secs
 ```
 **Template:** 70        
-==> Grouping
+:x: **Problem:** Grouping
 
 ----------------
 
@@ -336,7 +327,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 76:                0.044 secs
 ```
 **Template:** 77       
-===> ROLLUP
+:heavy_check_mark: **Solution:** ROLLUP
 
 ----------------
 
@@ -348,7 +339,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 85:                0.266 secs
 ```
 **Template:** 86          
-==> ROLLUP + Grouping
+:x: **Problem:** ROLLUP + Grouping
 
 ----------------
 
@@ -361,7 +352,7 @@ and ws_ext_discount_amt
 90:                0.050 secs
 ```
 **Template:** 92
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 
 
@@ -372,7 +363,7 @@ and ws1.ws_ship_addr_sk = ca_address_s' at line 12
 92:                0.087 secs
 ```
 **Template:** 94        
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -383,7 +374,7 @@ and ws1.ws_ship_addr_sk = ca_address_s' at line 17
 93:                0.052 secs
 ```
 **Template:** 95        
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 ----------------
 
@@ -393,7 +384,7 @@ ERROR 1064 (42000) at line 4: You have an error in your SQL syntax; check the ma
 95:                0.041 secs
 ```
 **Template:** 97         
-===> FULL OUTER JOIN -> LEFT OUTER JOIN
+:heavy_check_mark: **Solution:** FULL OUTER JOIN -> LEFT OUTER JOIN
 
 ----------------
 
@@ -407,7 +398,7 @@ group by
 96:                0.041 secs
 ```
 **Template:** 98            
-===> ADDDATE
+:heavy_check_mark: **Solution:** ADDDATE
 
 
 
@@ -415,8 +406,8 @@ group by
 ## Removed queries
 - **Template:** 8
 - **Template:** 14
-- **Template:** 38
-- **Template:** 87
 - **Template:** 36
+- **Template:** 38
 - **Template:** 70
 - **Template:** 86
+- **Template:** 87
