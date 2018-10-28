@@ -131,6 +131,7 @@ ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the ma
  f' at line 13
 72:                0.047 secs
 ```
+**Template:** Same than previous             
 :x: **Problem:** `Intersection`
 
 ----------------
