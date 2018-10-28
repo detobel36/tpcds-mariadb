@@ -14,7 +14,7 @@ MARKDOWN="markdown"
 if [ "$TYPE_REPORT" = "$MARKDOWN" ]
 then
 	OUTPUT_RESULT_FILE="result.md"
-	printf "| Query | Template | Time | Note |\n|-------|----------|------|------|\n" > $OUTPUT_RESULT_FILE
+	printf "| Query | Template | Time (secs) | Note |\n|-------|----------|-------------|------|\n" > $OUTPUT_RESULT_FILE
 else
 	echo "Unknow type of report"
 	exit
