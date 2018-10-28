@@ -60,6 +60,12 @@ create_mysql_user:
 	sudo $(MYSQL_PATH) -u root -e "CREATE USER $(DB_USER)@localhost;GRANT ALL PRIVILEGES ON *.* TO $(DB_USER)@localhost;FLUSH PRIVILEGES;"
 
 
+#### REPORT ####
+
+report_md:
+	./mkreport.sh markdown
+
+
 #### HELP ####
 
 help:
@@ -109,4 +115,9 @@ help:
 	@echo ""
 	@echo "make create_mysql_user"
 	@echo "\tCreate user in mariadb (based on configuration) with all permission and without password"
+	@echo ""
+	@echo "----- REPORT -----"
+	@echo ""
+	@echo "make report_md"
+	@echo "\tCreate a Markdown report of the last test"
 	@echo ""

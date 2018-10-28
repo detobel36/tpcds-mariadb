@@ -7,3 +7,4 @@ tpcds-kit/
 
 # Output log
 log-output-queries.txt
+result.*

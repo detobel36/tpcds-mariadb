@@ -3,7 +3,8 @@
 # Do Power Test of TPC-DS
 
 BINDIR=`dirname $0`
-
+LOG_FILE="log-output-queries.txt"
+RESULT_FILE="result.txt"
 USER=root
 
 # Usage: $0 [user [mysql_path]]
@@ -45,7 +46,8 @@ MYSQL="$MYSQL tpcds"
 TOTAL_MSECONDS=0
 
 # Reset logs
-echo "" > log-output-queries.txt
+echo "" > $LOG_FILE
+printf "QUERY|TEMPLATE|TIME\n" > $RESULT_FILE
 
 # Count number of queries
 NB_QUERIES=`ls -1 --file-type $BINDIR/tpcds-kit/tools/queries/ | grep -v '/$' | wc -l`
@@ -55,7 +57,7 @@ echo "Run $NB_QUERIES queries !"
 for q in $(eval echo "{1..$NB_QUERIES}")
 do
 	START=`msecs`
-	./runquery.sh $q $USER $MYSQL_PATH >> log-output-queries.txt
+	./runquery.sh $q 1 $RESULT_FILE $USER $MYSQL_PATH >> $LOG_FILE
 	END=`msecs`
 	DURATION=$(( $END - $START))
 	printf "%d: \t%16s secs\n" $q `msec_to_sec $DURATION`
