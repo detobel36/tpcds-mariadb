@@ -48,7 +48,7 @@ test_all: init_test test
 
 test_query:
 	./mkqueries.sh $(TEST_SIZE)
-	./runquery.sh $(QUERY) $(DB_USER) $(MYSQL_PATH)
+	./runquery.sh $(QUERY) 0 /dev/null $(DB_USER) $(MYSQL_PATH)
 
 
 #### DATABASE ####

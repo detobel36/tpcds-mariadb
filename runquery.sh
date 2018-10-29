@@ -57,8 +57,7 @@ echo "------------------------------------------------------------------------"
 cat $QPATH
 echo "------------------------------------------------------------------------"
 echo ""
-echo "SELECT: $SELECT_LINE"
-echo "TEMP: $TEMPLATE_NB"
+echo "**Template:** $TEMPLATE_NB"
 echo ""
 echo ""
 

@@ -16,6 +16,7 @@ bak_dir=queries_`printf %02d $SF`
 out_dir=queries
 
 mkdir -p $bak_dir
+rm $bak_dir/*.sql
 mkdir -p $out_dir
 ./dsqgen -directory ../query_templates/ \
         -QUALIFY Y \
@@ -32,6 +33,7 @@ for i in {1..9}
 do
 	mv $bak_dir/query-$i.sql $bak_dir/query-`printf %02d $i`.sql
 done
+rm $out_dir/*.sql
 cp $bak_dir/*.sql $out_dir/
 
 popd
