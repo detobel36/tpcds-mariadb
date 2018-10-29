@@ -65,6 +65,9 @@ create_mysql_user:
 report_md:
 	./mkreport.sh markdown
 
+report_tex:
+	./mkreport.sh latex
+
 
 #### HELP ####
 
@@ -120,4 +123,8 @@ help:
 	@echo ""
 	@echo "make report_md"
 	@echo "\tCreate a Markdown report of the last test"
+	@echo ""
+	@echo ""
+	@echo "make report_tex"
+	@echo "\tCreate a LaTeX report of the last test"
 	@echo ""
