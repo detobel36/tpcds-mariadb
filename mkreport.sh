@@ -18,10 +18,16 @@ function endFile {
 INPUT_RESULT_FILE="result.txt"
 TYPE_REPORT=$1
 
+CPU_INFO=`lscpu | grep "Model name:" | grep -oE "[^:]*$" | xargs`
+RAM_INFO=`free -h | grep "Mem" | grep -oE "^Mem:[ ]*[0-9,\.a-zA-Z]*" | grep -oE "[a-zA-Z0-9,\.]*$"`
+
 if [ "$TYPE_REPORT" = "markdown" ]
 then
 	OUTPUT_RESULT_FILE="result.md"
-	printf "| Query | Template | Time (secs) | Note |\n|-------|----------|-------------|------|\n" > $OUTPUT_RESULT_FILE
+	printf "CPU: $CPU_INFO   \n" > $OUTPUT_RESULT_FILE
+	printf "RAM: $RAM_INFO   \n" >> $OUTPUT_RESULT_FILE
+
+	printf "| Query | Template | Time (secs) | Note |\n|-------|----------|-------------|------|\n" >> $OUTPUT_RESULT_FILE
 
 	function generateLine {
 		printf "|$1| |\n"
@@ -31,7 +37,10 @@ then
 elif [ "$TYPE_REPORT" = "latex" ]
 then
 	OUTPUT_RESULT_FILE="result.tex"
-	printf "\\\\begin{longtable}{|c|c|c|c|}\n\\\\hline\n Query & Template & Time (secs) & Note \\\\\\ \\\\hline\n\\\\endfirsthead\n\\\\endhead\n\\\\endfoot\\\\endlastfoot" > $OUTPUT_RESULT_FILE
+	printf "CPU: $CPU_INFO\\\\\\ \\\\n" > $OUTPUT_RESULT_FILE
+	printf "RAM: $RAM_INFO\\\\\\ \\\\n" >> $OUTPUT_RESULT_FILE
+
+	printf "\\\\begin{longtable}{|c|c|c|c|}\n\\\\hline\n Query & Template & Time (secs) & Note \\\\\\ \\\\hline\n\\\\endfirsthead\n\\\\endhead\n\\\\endfoot\\\\endlastfoot" >> $OUTPUT_RESULT_FILE
 	#printf "\\\\begin{table}[]\n\\\\begin{tabular}{|l|l|l|l|}\n\\\\hline\nQuery & Template & Time (secs) & Note \\\\\\ \\hline\n" > $OUTPUT_RESULT_FILE
 
 	function generateLine {
