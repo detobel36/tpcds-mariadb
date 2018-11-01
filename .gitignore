@@ -6,5 +6,6 @@ Makefile.config
 tpcds-kit/
 
 # Output log
-log-output-queries.txt
+log-output-queries*.txt
 result.*
+log_*.log
