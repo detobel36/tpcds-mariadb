@@ -1,26 +1,19 @@
-# Toolbox for TPC-DS on MariaDB
+# TPC-DS for MariaDB
 
-This repository is a toolbox for [TPC-DS benchmark](http://www.tpc.org/tpcds/) execution on MariaDB.  The
-tools help modifying, building, and running TPC-DS kit source code for MariaDB.
+This repository contains files to download, build and test [MariaDB](https://mariadb.com) with [TPC-DS benchmark](http://www.tpc.org/tpcds/).
 
-
-## Pre-requisites
-
-You should get TPC-DS kit source code before using the tools.  You can download
-it from [TPC website](http://www.tpc.org/tpc_documents_current_versions/download_programs/tools-download-request.asp?bm_type=TPC-DS&bm_vers=2.5.0&mode=CURRENT-ONLY) as a zip file after agree to their license.
 
 
 ## Versions
 
-This toolbox is tested for TPC-DS tools v2.5.0rc2 and MariaDB 10.2.8, the
-latest version as of this writing.
+This toolbox is tested for TPC-DS tools v2 and MariaDB 10.2.
 
 
 ## Limitations
 
 TPC-DS has 99 queries for performance test.  However, some queries use SQL
 keywords that MariaDB doesn't support.  Our tools just ignore such queries on
-power test.  As a result, we use only 49 queries for power test.
+power test.  As a result, we use only 96 queries for power test.
 
 
 ## Makefile
